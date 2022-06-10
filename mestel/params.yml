@@ -1,0 +1,51 @@
+# Define the system of units to use internally.
+InternalUnitSystem:
+  UnitMass_in_cgs:     1.988e+43 # 10^10 Solar masses
+  UnitLength_in_cgs:   3.086e+21 # kpc
+  UnitVelocity_in_cgs: 1e5       # km / s
+  UnitCurrent_in_cgs:  1         # Amperes
+  UnitTemp_in_cgs:     1         # Kelvin
+  
+# Parameters governing the time integration (Set dt_min and dt_max to the same value for a fixed time-step run.)
+TimeIntegration:
+  time_begin:          0.      # The starting time of the simulation (in internal units).
+  time_end:            0.8    # The end time of the simulation (in internal units).
+  dt_min:              1e-10    # The minimal time-step size of the simulation (in internal units).
+  dt_max:              1e-2    # The maximal time-step size of the simulation (in internal units).
+
+# Parameters for the self-gravity scheme
+Gravity:
+  eta:                    0.002    # Constant dimensionless multiplier for time integration.
+  theta:                  0.6     # Opening angle (Multipole acceptance criterion)
+  MAC:                           adaptive  # Choice of mulitpole acceptance criterion: 'adaptive' OR 'geometric'.
+  epsilon_fmm:                   0.001     # Tolerance parameter for the adaptive multipole acceptance criterion.
+  theta_cr:                      0.7       # Opening angle for the purely gemoetric criterion.
+  max_physical_DM_softening: 0.05    # Physical softening length (in internal units).
+  
+# Parameters governing the snapshots
+Snapshots:
+  basename:            snap/output  # Common part of the name of output files
+  time_first:          0.      # Time of the first output (in internal units)
+  delta_time:          0.05    # Time difference between consecutive outputs (in internal units)
+
+# Parameters governing the conserved quantities statistics
+Statistics:
+  delta_time:          0.05    # Time between statistics output
+
+# Parameters related to the initial conditions
+InitialConditions:
+  file_name:          ../mestel.hdf5 # The file to read
+  shift: [1000.,1000.,1000.]
+  periodic:           0
+
+# External potential
+MestelPotentialPert:
+  position: [1000.,1000.,1000.]
+  v0: 141.4213562373095 # 200 * sqrt(1/2)
+  r0: 21.497905 
+  timestep_mult: 0.01
+  pert_r0: 8.0
+  pert_v0: 200.0
+  pert_alpha0: 0.0
+  pert_mass: 1e-20
+  pert_softening: 0.2
